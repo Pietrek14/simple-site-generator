@@ -1,4 +1,4 @@
-use std::{env, path::PathBuf};
+use std::{env, path::PathBuf, fs};
 
 use ssg::build_site_at_path;
 
@@ -11,5 +11,7 @@ fn main() {
 
     let filename = args[1].clone();
 
-    println!("{}", build_site_at_path(PathBuf::from(filename)));
+    let site = build_site_at_path(PathBuf::from(filename));
+
+    fs::write("index.html", site).expect("Couldn't save to file!");
 }
